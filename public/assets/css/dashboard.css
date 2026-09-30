@@ -1,4 +1,4 @@
-/* Visual inspirado no Light Bootstrap Dashboard: barra lateral escura, cartões brancos, fundo bege claro */
+
 :root {
   --azul: #1dc7ea; --verde: #87cb16; --laranja: #ffa534; --vermelho: #fb404b;
   --fundo: #f4f3ef; --texto: #333; --suave: #888;
@@ -12,7 +12,7 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Barra lateral */
+
 .sidebar {
   position: fixed; inset: 0 auto 0 0; width: var(--lateral);
   background: linear-gradient(180deg, #1f2a3c 0%, #2f3f5f 100%);
@@ -30,7 +30,7 @@ body {
 .sidebar nav a:hover { background: rgba(255,255,255,.12); }
 .sidebar nav a.ativo { background: rgba(255,255,255,.22); color: #fff; font-weight: 600; }
 
-/* Conteúdo */
+
 .principal { margin-left: var(--lateral); min-height: 100vh; }
 .topo {
   display: flex; align-items: center; gap: 1rem;
@@ -49,7 +49,7 @@ body {
 main { padding: 1.5rem; max-width: 1200px; }
 .aviso { background: #fde8e9; color: #a1232b; padding: .8rem 1rem; border-radius: 4px; }
 
-/* Cartões */
+
 .cartao {
   background: #fff; border-radius: 4px; padding: 1.2rem 1.4rem;
   box-shadow: 0 1px 4px rgba(0,0,0,.08);
@@ -66,19 +66,19 @@ main { padding: 1.5rem; max-width: 1200px; }
 .stat strong { font-size: 1.7rem; }
 .stat small { color: var(--suave); }
 
-/* Gráfico */
+
 #grafico svg { width: 100%; height: auto; }
 .svg-valor { font-size: 12px; fill: #555; }
 .svg-rotulo { font-size: 12px; fill: var(--suave); }
 
-/* Listas */
+
 .lista { list-style: none; margin: 0; padding: 0; }
 .lista li { padding: .6rem 0; border-bottom: 1px solid #eee; line-height: 1.45; }
 .lista li:last-child { border-bottom: 0; }
 .lista time { color: var(--suave); font-size: .8rem; margin-right: .4rem; }
 code { background: #f1efe8; padding: .1rem .35rem; border-radius: 3px; font-size: .88em; }
 
-/* Perfil */
+
 .perfil { display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap; }
 .avatar {
   width: 84px; height: 84px; border-radius: 50%; background: var(--azul); color: #fff;
@@ -90,7 +90,7 @@ code { background: #f1efe8; padding: .1rem .35rem; border-radius: 3px; font-size
 
 .rodape { color: var(--suave); font-size: .8rem; margin-top: 1rem; }
 
-/* Telas pequenas */
+
 @media (max-width: 860px) {
   .sidebar { transform: translateX(-100%); }
   .sidebar.aberta { transform: none; box-shadow: 0 0 40px rgba(0,0,0,.4); }
