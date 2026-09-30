@@ -1,0 +1,2 @@
+Homepage URL: https://lab-login-ketlyn.pages.dev
+Authorization callback URL: https://lab-login-ketlyn.pages.dev/oauth/callback/github
