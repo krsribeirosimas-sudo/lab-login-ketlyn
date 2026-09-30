@@ -11,12 +11,12 @@ export const PROVIDERS = {
   },
 };
 
-// Só aceita "google" ou "github". Qualquer outro nome devolve null.
+
 export function getProvider(name) {
   return Object.hasOwn(PROVIDERS, name) ? PROVIDERS[name] : null;
 }
 
-// Busca o Client ID e o Client Secret certos nas variáveis do Cloudflare
+
 export function getCredentials(name, env) {
   if (name === "google") {
     return {
@@ -30,7 +30,7 @@ export function getCredentials(name, env) {
   };
 }
 
-// Endereço de retorno exato de cada provedor
+
 export function redirectUri(name, env) {
   return `${env.PUBLIC_BASE_URL}/oauth/callback/${name}`;
 }
