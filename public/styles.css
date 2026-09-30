@@ -1,0 +1,39 @@
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #f4f6fb;
+}
+
+main {
+  background: white;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.botoes {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.botao {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: 0;
+  border-radius: 8px;
+  background: #2b59c3;
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
