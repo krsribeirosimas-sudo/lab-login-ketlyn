@@ -22,14 +22,14 @@ export function base64UrlToText(text) {
   return new TextDecoder().decode(base64UrlToBytes(text));
 }
 
-// 32 bytes aleatórios, em texto com 43 caracteres
+
 export function randomToken() {
   const bytes = new Uint8Array(32);
   crypto.getRandomValues(bytes);
   return base64Url(bytes);
 }
 
-// SHA-256 do texto, em Base64URL
+
 export async function sha256(text) {
   const digest = await crypto.subtle.digest("SHA-256", encoder.encode(text));
   return base64Url(new Uint8Array(digest));
