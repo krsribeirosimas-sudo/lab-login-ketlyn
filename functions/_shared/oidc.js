@@ -12,7 +12,7 @@ async function fetchJson(url) {
 
 
 export async function verifyGoogleIdToken(idToken, { clientId, nonce }) {
-  // 1. O JWT precisa ter exatamente 3 partes separadas por ponto
+  
   const parts = typeof idToken === "string" ? idToken.split(".") : [];
   if (parts.length !== 3 || parts.some((part) => !part)) {
     throw new Error("formato do token inválido");
