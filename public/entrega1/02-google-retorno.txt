@@ -1,0 +1,1 @@
+https://lab-login-ketlyn.pages.dev/oauth/callback/google
