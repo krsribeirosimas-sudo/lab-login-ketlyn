@@ -22,4 +22,4 @@
 Assinado por: Ketlyn Simas
 
 - Nome da estudante: Ketlyn Simas
-- Nome da dupla: Leonardo Ceratti
+- Nome da dupla: Leonardo Ceratti dos Santos
