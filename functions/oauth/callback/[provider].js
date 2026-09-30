@@ -11,7 +11,7 @@ const GITHUB_HEADERS = {
   "User-Agent": "oauth-pages-lab",
 };
 
-// Resposta de falha: simples, sem detalhes internos
+
 function fail(status = 400) {
   const headers = new Headers({
     "Content-Type": "text/plain; charset=utf-8",
@@ -21,7 +21,7 @@ function fail(status = 400) {
   return new Response("Não foi possível concluir o login.", { status, headers });
 }
 
-// Troca o código pelas provas de identidade
+
 async function exchangeCode(provider, name, env, code, codeVerifier) {
   const { clientId, clientSecret } = getCredentials(name, env);
   const body = new URLSearchParams({
@@ -44,7 +44,7 @@ async function exchangeCode(provider, name, env, code, codeVerifier) {
   return response.json();
 }
 
-// Google: valida o id_token
+
 async function identityFromGoogle(tokens, env, nonce) {
   const { clientId } = getCredentials("google", env);
   const claims = await verifyGoogleIdToken(tokens.id_token, { clientId, nonce });
@@ -56,7 +56,7 @@ async function identityFromGoogle(tokens, env, nonce) {
   };
 }
 
-// GitHub: consulta o perfil e revoga a autorização
+
 async function identityFromGithub(tokens, env) {
   const { clientId, clientSecret } = getCredentials("github", env);
   const accessToken = tokens.access_token;
@@ -71,7 +71,7 @@ async function identityFromGithub(tokens, env) {
   const profile = await profileResponse.json();
   if (!Number.isInteger(profile.id)) throw new Error("identificador inválido");
 
-  // Revoga a autorização; só continua se o GitHub responder 204
+  
   const revokeResponse = await fetch(
     `https://api.github.com/applications/${clientId}/grant`,
     {
@@ -107,17 +107,17 @@ export async function onRequestGet(context) {
   }
 
   try {
-    // 1. error, code e state
+    
     const url = new URL(request.url);
     const code = url.searchParams.get("code");
     const state = url.searchParams.get("state");
     if (url.searchParams.has("error") || !code || !state) return fail();
 
-    // 2. cookie temporário
+    
     const transactionId = getCookie(request, "__Host-oauth-tx");
     if (!transactionId) return fail();
 
-    // 3. transação existente e não expirada
+    
     const now = Math.floor(Date.now() / 1000);
     const idHash = await sha256(transactionId);
     const transaction = await env.DB.prepare(
@@ -130,7 +130,7 @@ export async function onRequestGet(context) {
     // 4. state confere?
     if (transaction.state_hash !== (await sha256(state))) return fail();
 
-    // 5. apaga a transação ANTES de concluir (só vale uma vez)
+    
     const deleted = await env.DB.prepare(
       "DELETE FROM oauth_transactions WHERE id_hash = ?1"
     )
@@ -138,14 +138,14 @@ export async function onRequestGet(context) {
       .run();
     if (deleted.meta.changes !== 1) return fail();
 
-    // 6 e 7. troca o código e confirma a identidade
+    
     const tokens = await exchangeCode(provider, name, env, code, transaction.code_verifier);
     const identity =
       name === "google"
         ? await identityFromGoogle(tokens, env, transaction.nonce)
         : await identityFromGithub(tokens, env);
 
-    // 8. cria a sessão opaca (no banco fica só o resumo)
+    
     const sessionToken = randomToken();
     await env.DB.prepare(
       "INSERT INTO sessions (id_hash, issuer, subject, email, display_name, expires_at, created_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)"
@@ -161,7 +161,7 @@ export async function onRequestGet(context) {
       )
       .run();
 
-    // 9 e 10. limpa o cookie temporário e volta para a página inicial
+    
     const headers = new Headers({
       Location: `${env.PUBLIC_BASE_URL}/`,
       "Cache-Control": "no-store",
