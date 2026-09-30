@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <!-- Esta página é um arquivo estático PÚBLICO. Os dados vêm de /api/dashboard, que exige sessão. -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">Lab Login</div>
+    <nav>
+      <a href="#painel" data-sec="painel" class="ativo">Painel</a>
+      <a href="#perfil" data-sec="perfil">Perfil</a>
+      <a href="#seguranca" data-sec="seguranca">Segurança</a>
+    </nav>
+  </aside>
+
+  <div class="principal">
+    <header class="topo">
+      <button id="menu" class="menu" type="button" aria-label="Abrir menu">☰</button>
+      <h1 id="titulo">Painel</h1>
+      <div class="usuario">
+        <span id="nome">…</span>
+        <form method="post" action="/oauth/logout">
+          <button class="sair" type="submit">Sair</button>
+        </form>
+      </div>
+    </header>
+
+    <main>
+      <p id="erro" class="aviso" hidden></p>
+
+      <!-- PAINEL -->
+      <section id="painel" class="secao">
+        <div id="stats" class="grade"></div>
+
+        <div class="duas">
+          <article class="cartao">
+            <h2 id="grafico-titulo">Gráfico</h2>
+            <div id="grafico"></div>
+          </article>
+          <article class="cartao">
+            <h2>Atividade recente</h2>
+            <ul id="atividade" class="lista"></ul>
+          </article>
+        </div>
+        <p class="rodape">Dados de exemplo, apenas para ilustrar o painel.</p>
+      </section>
+
+      <!-- PERFIL -->
+      <section id="perfil" class="secao" hidden>
+        <article class="cartao perfil">
+          <div id="avatar" class="avatar">?</div>
+          <dl>
+            <dt>Nome</dt><dd id="p-nome">—</dd>
+            <dt>E-mail</dt><dd id="p-email">—</dd>
+            <dt>Entrou com</dt><dd id="p-provedor">—</dd>
+            <dt>Sessão expira em</dt><dd id="p-expira">—</dd>
+          </dl>
+        </article>
+      </section>
+
+      <!-- SEGURANÇA -->
+      <section id="seguranca" class="secao" hidden>
+        <article class="cartao">
+          <h2>Como esta página é protegida</h2>
+          <ul class="lista">
+            <li>O navegador guarda só um cookie aleatório (<code>__Host-session</code>), <b>HttpOnly</b> e <b>Secure</b>.</li>
+            <li>O banco D1 guarda apenas o <b>resumo SHA-256</b> do cookie, nunca o valor bruto.</li>
+            <li>Os dados do painel vêm de <code>/api/dashboard</code>, que responde <b>401</b> sem sessão válida.</li>
+            <li>O arquivo <code>dashboard.html</code> continua <b>público</b>: qualquer pessoa consegue abri-lo, mas sem sessão ele não recebe dado nenhum e volta para o login.</li>
+            <li>Sair revoga a sessão local no D1 (não encerra a sessão no Google nem no GitHub).</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/dashboard.js"></script>
+</body>
+</html>

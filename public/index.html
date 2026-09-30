@@ -3,22 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Laboratório de autenticação</title>
+  <title>Entrar · Laboratório de autenticação</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <main>
+  <main class="cartao-login">
+    <div class="marca">LB</div>
     <h1>Laboratório de autenticação</h1>
-    <p id="status">A sessão ainda não foi consultada.</p>
+    <p id="status">Consultando a sessão…</p>
 
-    <div id="entrar" class="botoes">
+    <div id="entrar" class="botoes" hidden>
       <a class="botao" href="/oauth/login/google">Entrar com Google</a>
-      <a class="botao" href="/oauth/login/github">Entrar com GitHub</a>
+      <a class="botao escuro" href="/oauth/login/github">Entrar com GitHub</a>
     </div>
 
-    <form id="sair" method="post" action="/oauth/logout" hidden>
-      <button class="botao" type="submit">Sair</button>
-    </form>
+    <p class="nota">Depois do login você será levada ao dashboard.</p>
   </main>
   <script src="/app.js"></script>
 </body>
