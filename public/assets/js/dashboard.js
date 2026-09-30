@@ -2,7 +2,7 @@ const $ = (id) => document.getElementById(id);
 const titulos = { painel: "Painel", perfil: "Perfil", seguranca: "Segurança" };
 const nomesProvedor = { google: "Google", github: "GitHub" };
 
-// ---------- navegação entre seções (#painel, #perfil, #seguranca) ----------
+
 function mostrarSecao() {
   const id = titulos[location.hash.slice(1)] ? location.hash.slice(1) : "painel";
   document.querySelectorAll(".secao").forEach((s) => (s.hidden = s.id !== id));
@@ -16,7 +16,7 @@ window.addEventListener("hashchange", mostrarSecao);
 $("menu").addEventListener("click", () => $("sidebar").classList.toggle("aberta"));
 mostrarSecao();
 
-// ---------- desenho do gráfico de barras (SVG simples, sem biblioteca) ----------
+
 function desenharGrafico(chart) {
   const ns = "http://www.w3.org/2000/svg";
   const W = 560, H = 220, base = 190, topo = 20;
@@ -60,7 +60,7 @@ function desenharGrafico(chart) {
   $("grafico").replaceChildren(svg);
 }
 
-// ---------- preenchimento com os dados protegidos ----------
+
 function preencher(d) {
   const u = d.user;
   const nome = u.displayName || u.email || "Usuária";
@@ -73,7 +73,7 @@ function preencher(d) {
   $("p-provedor").textContent = nomesProvedor[u.provider] || u.provider;
   $("p-expira").textContent = new Date(d.sessionExpiresAt * 1000).toLocaleString("pt-BR");
 
-  // Cartões de números (textContent: nunca innerHTML com dados)
+  
   $("stats").replaceChildren(
     ...d.stats.map((s) => {
       const card = document.createElement("article");
@@ -90,11 +90,11 @@ function preencher(d) {
     })
   );
 
-  // Gráfico
+  
   $("grafico-titulo").textContent = d.chart.title;
   desenharGrafico(d.chart);
 
-  // Atividade
+  
   $("atividade").replaceChildren(
     ...d.activity.map((a) => {
       const li = document.createElement("li");
@@ -109,7 +109,7 @@ function preencher(d) {
 fetch("/api/dashboard", { credentials: "same-origin" })
   .then((r) => {
     if (r.status === 401) {
-      // sem sessão: volta para a página de login
+      
       window.location.replace("/");
       return null;
     }
