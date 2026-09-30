@@ -6,7 +6,7 @@ export async function onRequestGet(context) {
   const { env, params } = context;
   const name = params.provider;
 
-  // Só google ou github. Qualquer outro nome é 404, sem detalhes.
+  
   const provider = getProvider(name);
   if (!provider) {
     return new Response("Not found", {
@@ -17,7 +17,7 @@ export async function onRequestGet(context) {
 
   const { clientId } = getCredentials(name, env);
 
-  // Valores aleatórios da tentativa de login
+  
   const transactionId = randomToken();
   const state = randomToken();
   const codeVerifier = randomToken();
@@ -27,7 +27,7 @@ export async function onRequestGet(context) {
   const now = Math.floor(Date.now() / 1000);
   const expiresAt = now + 600; // 10 minutos
 
-  // Limpa transações antigas e grava a nova (só os resumos, nunca o cookie bruto)
+  
   await env.DB.prepare("DELETE FROM oauth_transactions WHERE expires_at < ?1")
     .bind(now)
     .run();
@@ -45,7 +45,7 @@ export async function onRequestGet(context) {
     )
     .run();
 
-  // Monta o pedido de autorização
+  
   const url = new URL(provider.authorizeUrl);
   url.searchParams.set("client_id", clientId);
   url.searchParams.set("redirect_uri", redirectUri(name, env));
@@ -58,7 +58,7 @@ export async function onRequestGet(context) {
     url.searchParams.set("scope", "openid email profile");
     url.searchParams.set("nonce", nonce);
   }
-  // No GitHub: sem scope e sem nonce, como o roteiro pede.
+  
 
   const headers = new Headers({
     Location: url.toString(),
