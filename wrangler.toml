@@ -1,0 +1,7 @@
+name = "lab-login-ketlyn"
+compatibility_date = "2026-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "oauth-sessions-ketlyn"
+database_id = "dc49a247-693d-44ef-bf44-382c1734f689"
