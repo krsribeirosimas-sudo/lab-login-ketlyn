@@ -1,0 +1,1 @@
+CREATE TABL notas (id INTEGER);
