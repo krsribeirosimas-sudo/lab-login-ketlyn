@@ -1,1 +1,1 @@
-CREATE TABL notas (id INTEGER);
+CREATE TABLE notas (id INTEGER);
