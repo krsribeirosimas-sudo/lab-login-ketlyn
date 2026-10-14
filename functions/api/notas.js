@@ -3,8 +3,8 @@ export async function onRequestGet({ request, env }) {
   const nome = url.searchParams.get("nome");
 
   const resultado = await env.DB.prepare(
-    `SELECT * FROM notas WHERE aluno = '${nome}'`
-  ).all();
+    "SELECT * FROM notas WHERE aluno = ?"
+  ).bind(nome).all();
 
   return Response.json(resultado.results);
 }
